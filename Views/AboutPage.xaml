@@ -1,23 +1,44 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:Notes.Models"
-             x:Class="Notes.Views.AboutPage">
+             xmlns:viewModels="clr-namespace:Notes.ViewModels"
+             x:Class="Notes.Views.AboutPage"
+             Title="Acerca de"
+             BackgroundColor="#F5F5F5">
     <ContentPage.BindingContext>
-        <models:About />
+        <viewModels:AboutViewModel />
     </ContentPage.BindingContext>
-    <VerticalStackLayout Spacing="10" Margin="10">
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Margin="20">
 
-        <Image Source="enner.jpg" HeightRequest="364" />
+            <!-- Header Section -->
+            <HorizontalStackLayout Spacing="15">
+                <Image Source="dotnet_bot.png"
+                       SemanticProperties.Description="El bot de .NET saludando!"
+                       HeightRequest="64" WidthRequest="64" />
+                <VerticalStackLayout VerticalOptions="Center">
+                    <Label FontSize="24" FontAttributes="Bold" Text="{Binding Title}" TextColor="#333333"/>
+                    <Label FontSize="18" Text="{Binding Version}" TextColor="#666666"/>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
 
+            <!-- Description Section -->
+            <Label Text="El patrón MVVM (Model-View-ViewModel) es un poderoso patrón arquitectónico utilizado para separar las responsabilidades en tu aplicación."
+                   FontSize="16" TextColor="#444444" Padding="5"/>
 
-        <!-- AÃ±adir informaciÃ³n personal -->
-        <HorizontalStackLayout Spacing="10" Margin="20,0,0,0">
-           
-            <VerticalStackLayout>
-                <Label FontSize="22" FontAttributes="Bold" Text="Pablo Criollo Escobar" />
-                <Label FontSize="18" Text="Soy estudiante de software de 5to semestre. Me gustan las apuestas, las motos y estudio software para crear algo." />
-            </VerticalStackLayout>
-        </HorizontalStackLayout>
-    </VerticalStackLayout>
+            <Label Text="En esta aplicación, MVVM asegura una clara separación entre la interfaz de usuario (View) y la lógica (ViewModel). El ViewModel actúa como un puente, exponiendo comandos y propiedades a la View mientras se comunica con los modelos de datos subyacentes. Este enfoque mejora la capacidad de prueba, escalabilidad y mantenibilidad del código."
+                   FontSize="16" TextColor="#444444" Padding="5"/>
+
+            <Label Text="Por ejemplo, las etiquetas 'Título' y 'Versión' están vinculadas a propiedades en el AboutViewModel, demostrando cómo los datos fluyen perfectamente desde el ViewModel hacia la View. De manera similar, el botón 'Aprender más...' está conectado a un comando en el ViewModel, permitiendo interacciones sin acoplar estrechamente la View a la lógica."
+                   FontSize="16" TextColor="#444444" Padding="5"/>
+
+            <Button Text="Aprender más..."
+                    Command="{Binding ShowMoreInfoCommand}"
+                    BackgroundColor="#007ACC" 
+                    TextColor="White" 
+                    CornerRadius="10" 
+                    Padding="10" />
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

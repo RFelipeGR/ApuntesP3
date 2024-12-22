@@ -1,21 +1,44 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:Notes.ViewModels"
              x:Class="Notes.Views.NotePage"
-             Title="Note">
-    <VerticalStackLayout Spacing="10" Margin="5">
+             Title="Note"
+             BackgroundColor="#FAFAFA">
+    <ContentPage.BindingContext>
+        <viewModels:NoteViewModel />
+    </ContentPage.BindingContext>
+    <VerticalStackLayout Spacing="15" Margin="20">
         <Editor x:Name="TextEditor"
                 Placeholder="Enter your note"
                 Text="{Binding Text}"
-                HeightRequest="100" />
+                HeightRequest="120"
+                BackgroundColor="#FFFFFF"
+                TextColor="Black"
+                FontSize="16"
+                FontAttributes="Italic"
+                Margin="0,0,0,10"
+                Padding="10"
+                CornerRadius="8"
+                BorderColor="#D3D3D3" />
 
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
             <Button Text="Save"
-                    Clicked="SaveButton_Clicked" />
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="#4CAF50"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="5"
+                    Padding="10" />
 
             <Button Grid.Column="1"
                     Text="Delete"
-                    Clicked="DeleteButton_Clicked" />
+                    Command="{Binding DeleteCommand}"
+                    BackgroundColor="#F44336"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="5"
+                    Padding="10" />
         </Grid>
     </VerticalStackLayout>
 </ContentPage>
